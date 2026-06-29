@@ -32,7 +32,7 @@ const mockups = [
   {
     title: "Profil wydarzenia",
     description: "Widok wydarzenia z informacjami i możliwością zgłoszenia.",
-    image: "/images/showcase/profil-wydarzenia.png",
+    image: "/images/showcase/profil-wydarzen.png",
   },
   {
     title: "Profil organizatora",
@@ -42,7 +42,7 @@ const mockups = [
   {
     title: "Lista wydarzeń",
     description: "Wyszukiwarka i katalog wydarzeń muzycznych.",
-    image: "/images/showcase/lista-wydarzen.png",
+    image: "/images/showcase/lista-wydarzenia.png",
   },
   {
     title: "Lista artystów",
