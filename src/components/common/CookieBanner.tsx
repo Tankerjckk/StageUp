@@ -26,28 +26,45 @@ export function CookieBanner() {
     };
   }, []);
 
-  function closeBanner(value: ConsentValue) {
-    localStorage.setItem(
-      COOKIE_KEY,
-      JSON.stringify({
-        status: value,
-        analytics: value === "accepted" ? analyticsEnabled : false,
-        date: new Date().toISOString(),
-      })
-    );
+function closeBanner(value: ConsentValue) {
+  const analyticsConsent = value === "accepted" ? analyticsEnabled : false;
 
-    setIsVisible(false);
-    document.body.style.overflow = "";
+  localStorage.setItem(
+    COOKIE_KEY,
+    JSON.stringify({
+      status: value,
+      analytics: analyticsConsent,
+      date: new Date().toISOString(),
+    })
+  );
 
-    window.dispatchEvent(
-      new CustomEvent("stageup-cookie-consent", {
-        detail: {
-          status: value,
-          analytics: value === "accepted" ? analyticsEnabled : false,
-        },
-      })
-    );
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "stageup_cookie_consent_update",
+    analytics_consent: analyticsConsent,
+  });
+
+  if (typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      analytics_storage: analyticsConsent ? "granted" : "denied",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+    });
   }
+
+  setIsVisible(false);
+  document.body.style.overflow = "";
+
+  window.dispatchEvent(
+    new CustomEvent("stageup-cookie-consent", {
+      detail: {
+        status: value,
+        analytics: analyticsConsent,
+      },
+    })
+  );
+}
 
   if (!isVisible) return null;
 

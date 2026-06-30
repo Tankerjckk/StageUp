@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+
 import { CookieBanner } from "@/components/common/CookieBanner";
+import { GoogleConsent } from "@/components/common/GoogleConsent";
 import { GoogleTagManager } from "@next/third-parties/google";
 
 const satoshi = localFont({
@@ -12,15 +14,12 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://stageup.pl"),
-
   title: {
     default: "StageUp – Platforma dla artystów i organizatorów wydarzeń",
     template: "%s | StageUp",
   },
-
   description:
     "StageUp łączy artystów, zespoły i organizatorów wydarzeń muzycznych. Znajdź koncerty, zgłoszenia i współprace w jednym miejscu.",
-
   keywords: [
     "StageUp",
     "artyści",
@@ -33,21 +32,17 @@ export const metadata: Metadata = {
     "muzyka",
     "scena muzyczna",
   ],
-
   authors: [{ name: "StageUp" }],
-
   creator: "StageUp",
-
-icons: {
-  icon: [
-    { url: "/favicon.ico" },
-    { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-    { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-  ],
-  apple: "/apple-touch-icon.png",
-},
-manifest: "/site.webmanifest",
-
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "pl_PL",
@@ -65,7 +60,6 @@ manifest: "/site.webmanifest",
       },
     ],
   },
-
   twitter: {
     card: "summary_large_image",
     title: "StageUp",
@@ -90,11 +84,13 @@ export default function RootLayout({
   return (
     <html lang="pl" className={satoshi.variable}>
       <body className="min-h-screen bg-[#FAFAFA] antialiased">
+        <GoogleConsent />
+
         <div className="overflow-x-hidden">{children}</div>
 
         <CookieBanner />
 
-      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+        <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
       </body>
     </html>
   );
