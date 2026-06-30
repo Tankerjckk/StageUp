@@ -47,7 +47,7 @@ export function Header() {
   }, [isOpen]);
 
   return (
-    <header className="sticky top-0 z-[100] bg-[#FAFAFA]/85 py-4 backdrop-blur-xl md:py-7">
+    <header className="sticky top-0 z-[9999] bg-[#FAFAFA]/85 py-4 backdrop-blur-xl md:py-7">
       <Container className="flex items-center justify-between">
         <a href="/" onClick={closeMenu} aria-label="StageUp - strona główna">
           <Logo />
@@ -81,8 +81,7 @@ export function Header() {
         </button>
       </Container>
 
-      <div
-        className={`fixed inset-0 z-[200] overflow-hidden lg:hidden ${
+      <div className={`fixed inset-0 z-[99999] overflow-hidden lg:hidden ${
           isOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
