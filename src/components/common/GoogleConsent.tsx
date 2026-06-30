@@ -32,6 +32,11 @@ export function GoogleConsent() {
               ad_user_data: 'denied',
               ad_personalization: 'denied'
             });
+            if (analyticsGranted) {
+  window.dataLayer.push({
+    event: 'consent_granted'
+  });
+}
           }
         } catch (error) {}
       `}
