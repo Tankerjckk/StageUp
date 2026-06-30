@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { CookieBanner } from "@/components/common/CookieBanner";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 const satoshi = localFont({
   src: "../../public/fonts/Satoshi-Variable.woff2",
@@ -92,6 +93,8 @@ export default function RootLayout({
         <div className="overflow-x-hidden">{children}</div>
 
         <CookieBanner />
+
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
       </body>
     </html>
   );
