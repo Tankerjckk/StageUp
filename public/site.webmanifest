@@ -1,1 +1,23 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "StageUp",
+  "short_name": "StageUp",
+  "description": "Platforma łącząca artystów, zespoły i organizatorów wydarzeń muzycznych.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#7C3AED",
+  "background_color": "#FAFAFA",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "pl"
+}
