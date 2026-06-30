@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
 import { supabaseAdmin } from "@/lib/supabaseAdmin";
-import { resend, EMAIL_FROM, NOTIFY_EMAIL, emailLayout } from "@/lib/email";
+import {
+  resend,
+  EMAIL_FROM,
+  NOTIFY_EMAIL,
+  emailLayout,
+  escapeHtml,
+  infoBox,
+  nl2br,
+} from "@/lib/email";
 
 export async function POST(request: Request) {
   try {
@@ -47,30 +55,79 @@ export async function POST(request: Request) {
       to: NOTIFY_EMAIL,
       subject: "Nowe zgłoszenie inwestorskie — StageUp",
       replyTo: email,
-      html: emailLayout(
-        "Nowe zgłoszenie inwestorskie",
-        `
-          <p><strong>Imię i nazwisko:</strong> ${fullName}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Firma:</strong> ${company || "Brak"}</p>
-          <p><strong>Wiadomość:</strong></p>
-          <p>${message.replace(/\n/g, "<br />")}</p>
-        `
-      ),
+      html: emailLayout({
+        variant: "investor",
+        eyebrow: "Investor request",
+        title: "Nowe zgłoszenie inwestorskie",
+        subtitle: "Potencjalna współpraca lub inwestycja w StageUp.",
+        content: `
+          <p style="margin:0 0 18px;">
+            Otrzymano nowe zgłoszenie z formularza inwestorskiego.
+          </p>
+
+          ${infoBox([
+            { label: "Imię i nazwisko", value: fullName },
+            { label: "Email", value: email },
+            { label: "Firma", value: company || "Brak" },
+            { label: "Źródło", value: "contact_page" },
+          ])}
+
+          <div style="margin-top:24px;">
+            <p style="margin:0 0 10px;font-size:15px;font-weight:900;color:#111111;">
+              Wiadomość:
+            </p>
+
+            <div style="padding:20px;border-radius:20px;background:#FAFAFA;border:1px solid #ECE8F4;font-size:15px;line-height:1.75;color:#4B4654;">
+              ${nl2br(message)}
+            </div>
+          </div>
+        `,
+        cta: {
+          label: "Odpowiedz na wiadomość",
+          href: `mailto:${email}`,
+        },
+        footerNote:
+          "To zgłoszenie dotyczy potencjalnej współpracy, partnerstwa lub inwestycji.",
+      }),
     });
 
     await resend.emails.send({
       from: EMAIL_FROM,
       to: email,
       subject: "Otrzymaliśmy zgłoszenie inwestorskie — StageUp",
-      html: emailLayout(
-        "Dziękujemy za zainteresowanie StageUp",
-        `
-          <p>Cześć ${fullName},</p>
-          <p>Otrzymaliśmy Twoje zgłoszenie dotyczące współpracy lub inwestycji.</p>
-          <p>Zapoznamy się z wiadomością i odezwiemy się możliwie najszybciej.</p>
-        `
-      ),
+      html: emailLayout({
+        variant: "investor",
+        eyebrow: "StageUp",
+        title: "Dziękujemy za zainteresowanie",
+        subtitle: "Otrzymaliśmy Twoje zgłoszenie dotyczące współpracy lub inwestycji.",
+        content: `
+          <p style="margin:0 0 18px;">Cześć <strong>${escapeHtml(fullName)}</strong>,</p>
+
+          <p style="margin:0 0 18px;">
+            dziękujemy za kontakt i zainteresowanie StageUp. Otrzymaliśmy Twoje zgłoszenie
+            dotyczące współpracy, partnerstwa lub inwestycji.
+          </p>
+
+          <p style="margin:0 0 18px;">
+            Zapoznamy się z wiadomością i odezwiemy się możliwie najszybciej.
+          </p>
+
+          <div style="margin:24px 0;padding:20px;border-radius:22px;background:#F7F3FF;border:1px solid #E9DDFD;">
+            <p style="margin:0 0 12px;font-size:15px;font-weight:900;color:#111111;">
+              Co możesz otrzymać dalej?
+            </p>
+            <p style="margin:0 0 8px;">✓ informacje o kierunku rozwoju StageUp</p>
+            <p style="margin:0 0 8px;">✓ szczegóły dotyczące projektu i rynku</p>
+            <p style="margin:0;">✓ możliwość rozmowy o współpracy</p>
+          </div>
+        `,
+        cta: {
+          label: "Zobacz StageUp",
+          href: "https://stageup.pl",
+        },
+        footerNote:
+          "Dziękujemy za zainteresowanie projektem. StageUp powstaje jako platforma dla sceny muzycznej.",
+      }),
     });
 
     return NextResponse.json(
