@@ -9,7 +9,8 @@ import {
   Rocket,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { supabase } from "@/lib/supabase";
+
+type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactPageForms() {
   return (
@@ -37,9 +38,7 @@ function ContactForm() {
     accepted: false,
   });
 
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -60,29 +59,37 @@ function ContactForm() {
 
     setStatus("loading");
 
-    const { error } = await supabase.from("contact_messages").insert({
-      name: form.name,
-      email: form.email,
-      subject: form.subject,
-      message: form.message,
-      accepted_terms: form.accepted,
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-    if (error) {
+      const data = await response.json();
+
+      if (!response.ok) {
+        setStatus("error");
+        setMessage(data.message || "Nie udało się wysłać wiadomości.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(data.message || "Wiadomość została wysłana. Dzięki!");
+
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        accepted: false,
+      });
+    } catch {
       setStatus("error");
-      setMessage("Nie udało się wysłać wiadomości. Spróbuj ponownie.");
-      return;
+      setMessage("Wystąpił błąd połączenia. Spróbuj ponownie.");
     }
-
-    setStatus("success");
-    setMessage("Wiadomość została wysłana. Dzięki!");
-    setForm({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-      accepted: false,
-    });
   }
 
   return (
@@ -109,6 +116,7 @@ function ContactForm() {
             value={form.name}
             onChange={(value) => setForm({ ...form, name: value })}
           />
+
           <Input
             placeholder="E-mail"
             type="email"
@@ -160,9 +168,7 @@ function InvestorForm() {
     accepted: false,
   });
 
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<FormStatus>("idle");
   const [message, setMessage] = useState("");
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -183,29 +189,37 @@ function InvestorForm() {
 
     setStatus("loading");
 
-    const { error } = await supabase.from("investor_requests").insert({
-      full_name: form.fullName,
-      email: form.email,
-      company: form.company,
-      message: form.message,
-      accepted_terms: form.accepted,
-    });
+    try {
+      const response = await fetch("/api/investor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
 
-    if (error) {
+      const data = await response.json();
+
+      if (!response.ok) {
+        setStatus("error");
+        setMessage(data.message || "Nie udało się wysłać zgłoszenia.");
+        return;
+      }
+
+      setStatus("success");
+      setMessage(data.message || "Zgłoszenie inwestorskie zostało wysłane.");
+
+      setForm({
+        fullName: "",
+        email: "",
+        company: "",
+        message: "",
+        accepted: false,
+      });
+    } catch {
       setStatus("error");
-      setMessage("Nie udało się wysłać zgłoszenia. Spróbuj ponownie.");
-      return;
+      setMessage("Wystąpił błąd połączenia. Spróbuj ponownie.");
     }
-
-    setStatus("success");
-    setMessage("Zgłoszenie inwestorskie zostało wysłane.");
-    setForm({
-      fullName: "",
-      email: "",
-      company: "",
-      message: "",
-      accepted: false,
-    });
   }
 
   return (
@@ -231,12 +245,14 @@ function InvestorForm() {
           value={form.fullName}
           onChange={(value) => setForm({ ...form, fullName: value })}
         />
+
         <Input
           placeholder="E-mail"
           type="email"
           value={form.email}
           onChange={(value) => setForm({ ...form, email: value })}
         />
+
         <Input
           placeholder="Firma / organizacja"
           value={form.company}
@@ -368,7 +384,7 @@ function FormMessage({
   status,
   message,
 }: {
-  status: "idle" | "loading" | "success" | "error";
+  status: FormStatus;
   message: string;
 }) {
   return (

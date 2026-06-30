@@ -22,7 +22,7 @@ export function emailLayout(title: string, content: string) {
         </div>
         <hr style="border:none;border-top:1px solid #eee;margin:28px 0;" />
         <p style="font-size:13px;color:#777;margin:0;">
-          StageUp — platforma łącząca artystów, zespoły i organizatorów wydarzeń.
+          StageUp - Twoja droga na scenę zaczyna się tutaj.
         </p>
       </div>
     </div>
