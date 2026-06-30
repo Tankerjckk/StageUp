@@ -14,26 +14,53 @@ const satoshi = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://stageup.pl"),
+
   title: {
-    default: "StageUp – Platforma dla artystów i organizatorów wydarzeń",
+    default: "StageUp - platforma bookingowa dla artystów i organizatorów wydarzeń",
     template: "%s | StageUp",
   },
+
   description:
-    "StageUp łączy artystów, zespoły i organizatorów wydarzeń muzycznych. Znajdź koncerty, zgłoszenia i współprace w jednym miejscu.",
+    "StageUp to platforma bookingowa łącząca artystów, zespoły i organizatorów wydarzeń muzycznych. Dołącz do listy oczekujących i rozwijaj swoją obecność na scenie.",
+
   keywords: [
-    "StageUp",
+    "platforma bookingowa",
+    "booking artystów",
+    "portal dla muzyków",
+    "platforma dla muzyków",
     "artyści",
-    "zespoły",
-    "organizatorzy",
+    "zespoły muzyczne",
+    "organizatorzy wydarzeń",
     "koncerty",
     "festiwale",
     "wydarzenia muzyczne",
-    "booking",
-    "muzyka",
-    "scena muzyczna",
+    "StageUp",
   ],
+
   authors: [{ name: "StageUp" }],
   creator: "StageUp",
+  publisher: "StageUp",
+
+  applicationName: "StageUp",
+
+  category: "music",
+
+  alternates: {
+    canonical: "https://stageup.pl",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -42,29 +69,32 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
+
   manifest: "/site.webmanifest",
+
   openGraph: {
     type: "website",
     locale: "pl_PL",
     url: "https://stageup.pl",
     siteName: "StageUp",
-    title: "StageUp – Platforma dla artystów i organizatorów wydarzeń",
+    title: "StageUp - platforma bookingowa dla artystów i organizatorów wydarzeń",
     description:
-      "Łączymy artystów, zespoły i organizatorów wydarzeń muzycznych.",
+      "Platforma łącząca artystów, zespoły i organizatorów wydarzeń muzycznych. Dołącz do listy oczekujących StageUp.",
     images: [
       {
         url: "/og-image.webp",
         width: 1200,
         height: 630,
-        alt: "StageUp",
+        alt: "StageUp – platforma bookingowa dla sceny muzycznej",
       },
     ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "StageUp",
+    title: "StageUp – platforma bookingowa dla sceny muzycznej",
     description:
-      "Platforma dla artystów, zespołów i organizatorów wydarzeń muzycznych.",
+      "StageUp łączy artystów, zespoły i organizatorów wydarzeń muzycznych.",
     images: ["/og-image.webp"],
   },
 };
