@@ -14,7 +14,7 @@ import { Container } from "@/components/ui/Container";
 
 export const metadata: Metadata = {
   title: "Regulamin | StageUp",
-  description: "Regulamin korzystania z landing page StageUp.",
+  description: "Regulamin korzystania z StageUp.",
 };
 
 const sections = [
@@ -49,7 +49,7 @@ export default function TermsPage() {
             </p>
 
             <h1 className="mt-4 text-[42px] font-black leading-[1.05] tracking-[-0.055em] md:text-[64px]">
-              Regulamin landing page
+              Regulamin StageUp
             </h1>
 
             <p className="mt-6 max-w-2xl text-[17px] font-medium leading-[1.75] text-[#6F6B78]">
