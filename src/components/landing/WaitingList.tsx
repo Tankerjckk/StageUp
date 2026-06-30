@@ -5,7 +5,6 @@ import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { useWaitlist } from "@/context/WaitlistContext";
-import { supabase } from "@/lib/supabase";
 import { SelectField } from "@/components/ui/SelectField";
 
 export function WaitingList() {
@@ -41,33 +40,38 @@ export function WaitingList() {
 
     setStatus("loading");
 
-    const { error } = await supabase.from("waitlist").insert({
-      email: email.trim().toLowerCase(),
-      full_name: form.name.trim(),
-      user_type: form.userType,
-      source: "landing_waitlist",
+    const response = await fetch("/api/waitlist", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: form.name,
+        email,
+        city: form.city,
+        userType: form.userType,
+        accepted: form.accepted,
+      }),
     });
 
-    if (error) {
+    const data = await response.json();
+
+    if (!response.ok) {
       setStatus("error");
-
-      if (error.code === "23505") {
-        setMessage("Ten adres e-mail jest już zapisany na listę.");
-      } else {
-        setMessage("Nie udało się zapisać na listę. Spróbuj ponownie.");
-      }
-
+      setMessage(data.message || "Nie udało się zapisać na listę.");
       return;
     }
 
     setStatus("success");
-    setMessage("Jesteś zapisany na listę oczekujących StageUp!");
+    setMessage(data.message || "Jesteś zapisany na listę oczekujących StageUp!");
+
     setForm({
       name: "",
       city: "",
       userType: "",
       accepted: false,
     });
+
     setEmail("");
   }
 
@@ -126,16 +130,16 @@ export function WaitingList() {
                 placeholder="Miasto"
               />
 
-<SelectField
-  placeholder="Kim jesteś?"
-  value={form.userType}
-  onChange={(value) => setForm({ ...form, userType: value })}
-  options={[
-    { label: "Artysta", value: "artist" },
-    { label: "Zespół", value: "band" },
-    { label: "Organizator", value: "organizer" },
-  ]}
-/>
+              <SelectField
+                placeholder="Kim jesteś?"
+                value={form.userType}
+                onChange={(value) => setForm({ ...form, userType: value })}
+                options={[
+                  { label: "Artysta", value: "artist" },
+                  { label: "Zespół", value: "band" },
+                  { label: "Organizator", value: "organizer" },
+                ]}
+              />
 
               <div className="md:col-span-2">
                 <LegalCheckbox
