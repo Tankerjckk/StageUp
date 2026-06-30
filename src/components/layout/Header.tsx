@@ -7,10 +7,10 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 const navItems = [
-  { label: "Dla artystów", href: "#features" },
-  { label: "Dla organizatorów", href: "#features" },
-  { label: "Jak to działa", href: "#how-it-works" },
-  { label: "O projekcie", href: "#waiting-list" },
+  { label: "Dla artystów", href: "/#features" },
+  { label: "Dla organizatorów", href: "/#features" },
+  { label: "Jak to działa", href: "/#how-it-works" },
+  { label: "O projekcie", href: "/#waiting-list" },
 ];
 
 export function Header() {
@@ -31,7 +31,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-[100] bg-[#FAFAFA]/85 py-4 backdrop-blur-xl md:py-7">
       <Container className="flex items-center justify-between">
-        <a href="#" onClick={closeMenu} aria-label="StageUp - strona główna">
+        <a href="/" onClick={closeMenu} aria-label="StageUp - strona główna">
           <Logo />
         </a>
 
@@ -47,11 +47,11 @@ export function Header() {
           ))}
         </nav>
 
-<div className="hidden lg:block">
-  <a href="/projekty">
-    <Button>Zobacz platformę</Button>
-  </a>
-</div>
+        <div className="hidden lg:block">
+          <a href="/projekty">
+            <Button>Zobacz platformę</Button>
+          </a>
+        </div>
 
         <button
           type="button"
@@ -83,7 +83,9 @@ export function Header() {
           }`}
         >
           <div className="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
-            <Logo />
+            <a href="/" onClick={closeMenu} aria-label="StageUp - strona główna">
+              <Logo />
+            </a>
 
             <button
               type="button"
@@ -121,12 +123,20 @@ export function Header() {
 
           <div className="border-t border-neutral-100 p-5">
             <a
-              href="#waiting-list"
+              href="/projekty"
               onClick={closeMenu}
               className="flex h-[58px] items-center justify-center gap-3 rounded-2xl bg-purple-600 text-[15px] font-black text-white shadow-xl shadow-purple-600/20 transition hover:bg-purple-700"
             >
-              Dołącz do listy
+              Zobacz platformę
               <ArrowRight size={18} />
+            </a>
+
+            <a
+              href="/#waiting-list"
+              onClick={closeMenu}
+              className="mt-3 flex h-[54px] items-center justify-center rounded-2xl border border-purple-200 bg-white text-[15px] font-black text-purple-700 transition hover:bg-purple-50"
+            >
+              Dołącz do listy
             </a>
 
             <p className="mt-4 text-center text-[13px] font-medium leading-6 text-neutral-500">
