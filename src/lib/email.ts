@@ -64,7 +64,7 @@ export function emailLayout(title: string, content: string, cta?: { label: strin
 
                 <div style="margin-top:34px;padding-top:22px;border-top:1px solid #EFE7FB;">
                   <p style="margin:0;font-size:13px;line-height:1.7;color:#7A7485;">
-                    StageUp — platforma łącząca artystów, zespoły i organizatorów wydarzeń.
+                    StageUp - platforma łącząca artystów, zespoły i organizatorów wydarzeń.
                   </p>
                   <p style="margin:10px 0 0;font-size:13px;color:#7A7485;">
                     W każdej chwili możesz zrezygnować z komunikacji, pisząc na support@stageup.pl.

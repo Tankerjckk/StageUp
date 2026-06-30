@@ -21,10 +21,28 @@ export function Header() {
   }
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
+    if (!isOpen) return;
+
+    const scrollY = window.scrollY;
+
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
 
     return () => {
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.left = "";
+      document.body.style.right = "";
+      document.body.style.width = "";
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+
+      window.scrollTo(0, scrollY);
     };
   }, [isOpen]);
 
@@ -64,7 +82,7 @@ export function Header() {
       </Container>
 
       <div
-        className={`fixed inset-0 z-[200] lg:hidden ${
+        className={`fixed inset-0 z-[200] overflow-hidden lg:hidden ${
           isOpen ? "pointer-events-auto" : "pointer-events-none"
         }`}
       >
@@ -72,17 +90,17 @@ export function Header() {
           type="button"
           aria-label="Zamknij menu"
           onClick={closeMenu}
-          className={`absolute inset-0 bg-black/35 backdrop-blur-[2px] transition-opacity duration-300 ${
+          className={`absolute inset-0 touch-none bg-black/40 backdrop-blur-[6px] transition-opacity duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}
         />
 
         <aside
-          className={`absolute right-0 top-0 flex h-dvh w-[88vw] max-w-[390px] flex-col bg-white shadow-[-30px_0_80px_rgba(20,20,40,0.18)] transition-transform duration-300 ease-out ${
+          className={`absolute right-0 top-0 flex h-[100dvh] w-[88vw] max-w-[390px] flex-col overflow-hidden bg-white shadow-[-30px_0_80px_rgba(20,20,40,0.18)] transition-transform duration-300 ease-out ${
             isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         >
-          <div className="flex items-center justify-between border-b border-neutral-100 px-6 py-5">
+          <div className="shrink-0 flex items-center justify-between border-b border-neutral-100 px-6 py-5">
             <a href="/" onClick={closeMenu} aria-label="StageUp - strona główna">
               <Logo />
             </a>
@@ -97,7 +115,7 @@ export function Header() {
             </button>
           </div>
 
-          <nav className="flex-1 px-5 py-5">
+          <nav className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-5">
             <div className="grid gap-2">
               {navItems.map((item, index) => (
                 <a
@@ -121,7 +139,7 @@ export function Header() {
             </div>
           </nav>
 
-          <div className="border-t border-neutral-100 p-5">
+          <div className="shrink-0 border-t border-neutral-100 p-5">
             <a
               href="/projekty"
               onClick={closeMenu}
