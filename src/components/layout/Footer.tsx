@@ -6,6 +6,7 @@ const platformLinks = [
   { label: "Dla artystów", href: "/#features" },
   { label: "Dla organizatorów", href: "/#features" },
   { label: "Jak to działa", href: "/#how-it-works" },
+  { label: "FAQ", href: "/#faq" },
   { label: "Poznaj platformę", href: "/projekty" },
 ];
 

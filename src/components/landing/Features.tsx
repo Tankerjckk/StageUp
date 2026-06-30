@@ -4,24 +4,24 @@ import { Container } from "@/components/ui/Container";
 const cards = [
   {
     icon: Music2,
-    title: "Dla artystów",
-    text: "Znajdź koncerty, supporty i festiwale. Buduj swoją karierę i docieraj do nowych odbiorców.",
+    title: "Dla artystów i zespołów",
+    text: "StageUp pomaga muzykom, wokalistom, DJ-om i zespołom znajdować koncerty, supporty, festiwale oraz nowe możliwości występów.",
     items: [
-      "Znajdź koncerty i wydarzenia dopasowane do Ciebie",
-      "Aplikuj i pokaż się organizatorom",
-      "Zbuduj swój profil i portfolio",
-      "Rozwijaj swoją markę i zdobywaj doświadczenie",
+      "Znajduj koncerty i wydarzenia dopasowane do Twojego profilu",
+      "Aplikuj na zgłoszenia od organizatorów",
+      "Buduj profil artysty, portfolio i historię występów",
+      "Rozwijaj markę muzyczną i zdobywaj doświadczenie sceniczne",
     ],
   },
   {
     icon: CalendarDays,
-    title: "Dla organizatorów",
-    text: "Dodaj wydarzenie w kilka minut i otrzymuj zgłoszenia od artystów w jednym miejscu.",
+    title: "Dla organizatorów wydarzeń",
+    text: "Organizatorzy koncertów, klubów, festiwali i eventów mogą szybciej docierać do artystów oraz zarządzać zgłoszeniami w jednym miejscu.",
     items: [
-      "Dodaj wydarzenie szybko i wygodnie",
-      "Otrzymuj zgłoszenia w jednym miejscu",
-      "Znajdź idealnych artystów do swojego eventu",
-      "Zarządzaj wydarzeniami i komunikacją",
+      "Dodawaj wydarzenia muzyczne i zaproszenia do współpracy",
+      "Otrzymuj zgłoszenia od artystów i zespołów",
+      "Znajduj wykonawców pasujących do charakteru eventu",
+      "Zarządzaj komunikacją i wyborem artystów wygodniej",
     ],
   },
 ];
@@ -33,26 +33,31 @@ export function Features() {
       className="bg-[#FAFAFA] pb-[56px] pt-[64px] sm:pb-[72px] sm:pt-[78px] lg:pb-[82px] lg:pt-[74px]"
     >
       <Container>
-        <div className="mx-auto max-w-[720px] text-center">
+        <div className="mx-auto max-w-[760px] text-center">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#6D28D9] sm:text-[13px] sm:tracking-[0.22em]">
-            Dla artystów i organizatorów
+            Platforma dla muzyków i organizatorów
           </p>
 
-          <h2 className="mx-auto mt-[12px] max-w-[620px] text-[31px] font-black leading-[1.08] tracking-[-0.045em] text-[#090909] sm:text-[38px] md:text-[40px] md:leading-tight">
-            Wszystko, czego potrzebujesz
+          <h2 className="mx-auto mt-[12px] max-w-[680px] text-[31px] font-black leading-[1.08] tracking-[-0.045em] text-[#090909] sm:text-[38px] md:text-[40px] md:leading-tight">
+            Booking artystów i wydarzenia muzyczne w jednym miejscu
           </h2>
 
-          <div className="mx-auto mt-[14px] h-[4px] w-[48px] rounded-full bg-[#6D28D9]" />
+          <p className="mx-auto mt-[16px] max-w-[620px] text-[15px] font-medium leading-[1.75] text-[#6F6B78] sm:text-[16px]">
+            StageUp powstaje jako platforma ułatwiająca współpracę między sceną
+            muzyczną a organizatorami koncertów, festiwali i eventów.
+          </p>
+
+          <div className="mx-auto mt-[18px] h-[4px] w-[48px] rounded-full bg-[#6D28D9]" />
         </div>
 
-        <div className="mt-[30px] grid gap-[20px] sm:mt-[36px] lg:mt-[28px] lg:grid-cols-2 lg:gap-[32px]">
+        <div className="mt-[30px] grid gap-[20px] sm:mt-[36px] lg:mt-[34px] lg:grid-cols-2 lg:gap-[32px]">
           {cards.map((card) => {
             const Icon = card.icon;
 
             return (
               <article
                 key={card.title}
-                className="rounded-[24px] border border-[#E8E4EF] bg-white px-[22px] py-[28px] shadow-[0_18px_55px_rgba(20,20,40,0.04)] sm:px-[32px] sm:py-[36px] lg:min-h-[330px] lg:rounded-[18px] lg:px-[58px] lg:py-[42px] lg:shadow-[0_14px_45px_rgba(20,20,40,0.025)]"
+                className="rounded-[24px] border border-[#E8E4EF] bg-white px-[22px] py-[28px] shadow-[0_18px_55px_rgba(20,20,40,0.04)] sm:px-[32px] sm:py-[36px] lg:min-h-[350px] lg:rounded-[18px] lg:px-[58px] lg:py-[42px] lg:shadow-[0_14px_45px_rgba(20,20,40,0.025)]"
               >
                 <div className="flex flex-col gap-[22px] sm:flex-row sm:items-start sm:gap-[24px] lg:gap-[28px]">
                   <div className="flex h-[56px] w-[56px] shrink-0 items-center justify-center rounded-[16px] bg-[#F1EAFE] text-[#6D28D9] lg:h-[58px] lg:w-[58px] lg:rounded-[14px]">
@@ -60,7 +65,7 @@ export function Features() {
                   </div>
 
                   <div className="min-w-0">
-                    <h3 className="text-[25px] font-black leading-none tracking-[-0.04em] text-[#090909] sm:text-[26px]">
+                    <h3 className="text-[25px] font-black leading-tight tracking-[-0.04em] text-[#090909] sm:text-[26px]">
                       {card.title}
                     </h3>
 
@@ -84,13 +89,13 @@ export function Features() {
                       ))}
                     </div>
 
-                    <button
-                      type="button"
+                    <a
+                      href="#waiting-list"
                       className="mt-[26px] inline-flex items-center gap-[9px] text-[15px] font-black text-[#7C3AED] transition hover:text-[#5B21B6] lg:mt-[28px]"
                     >
-                      Dowiedz się więcej
+                      Dołącz do listy oczekujących
                       <ArrowRight size={17} strokeWidth={2.4} />
-                    </button>
+                    </a>
                   </div>
                 </div>
               </article>

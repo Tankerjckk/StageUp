@@ -5,26 +5,26 @@ const steps = [
   {
     icon: User,
     number: "01",
-    title: "Załóż profil",
-    text: "Utwórz profil artysty\nlub organizatora",
+    title: "Tworzysz profil",
+    text: "Artysta, zespół lub organizator buduje profil z najważniejszymi informacjami.",
   },
   {
     icon: CalendarDays,
     number: "02",
-    title: "Dodaj lub znajdź wydarzenie",
-    text: "Przeglądaj lub dodawaj\nwydarzenia muzyczne",
+    title: "Dodajesz lub znajdujesz wydarzenie",
+    text: "Organizator publikuje wydarzenie, a artyści mogą szukać koncertów i zgłoszeń.",
   },
   {
     icon: Send,
     number: "03",
-    title: "Aplikuj lub zapraszaj",
-    text: "Aplikuj na wydarzenia\nlub zaproś artystów",
+    title: "Aplikujesz lub zapraszasz",
+    text: "Artyści wysyłają zgłoszenia, a organizatorzy mogą zapraszać wybranych wykonawców.",
   },
   {
     icon: HeartHandshake,
     number: "04",
-    title: "Nawiąż współpracę",
-    text: "Dogadaj szczegóły\ni twórz muzyczne historie",
+    title: "Nawiązujecie współpracę",
+    text: "StageUp pomaga połączyć odpowiednie osoby i uporządkować proces bookingowy.",
   },
 ];
 
@@ -35,14 +35,19 @@ export function HowItWorks() {
       className="bg-[#FAFAFA] py-[64px] sm:py-[78px] lg:py-[90px]"
     >
       <Container>
-        <div className="mx-auto max-w-[760px] text-center">
+        <div className="mx-auto max-w-[780px] text-center">
           <p className="text-[11px] font-black uppercase tracking-[0.2em] text-[#6D28D9] sm:text-[13px] sm:tracking-[0.22em]">
-            Jak to działa?
+            Jak działa platforma bookingowa?
           </p>
 
           <h2 className="mt-[12px] text-[32px] font-black leading-[1.08] tracking-[-0.045em] text-[#090909] sm:text-[42px]">
-            Prosto. Szybko. Skutecznie.
+            Od profilu do współpracy scenicznej
           </h2>
+
+          <p className="mx-auto mt-[16px] max-w-[620px] text-[15px] font-medium leading-[1.75] text-[#6F6B78] sm:text-[16px]">
+            StageUp upraszcza proces szukania koncertów, dodawania wydarzeń i
+            kontaktu między artystami a organizatorami.
+          </p>
         </div>
 
         <div className="relative mx-auto mt-[42px] max-w-[620px] lg:mt-[62px] lg:max-w-none">
@@ -78,7 +83,7 @@ export function HowItWorks() {
                       {step.title}
                     </h3>
 
-                    <p className="mt-[10px] whitespace-pre-line text-[15px] font-medium leading-[1.65] text-[#6B6674] lg:mt-[14px] lg:text-[16px] lg:font-normal lg:leading-[1.7]">
+                    <p className="mt-[10px] text-[15px] font-medium leading-[1.65] text-[#6B6674] lg:mt-[14px] lg:text-[16px] lg:font-normal lg:leading-[1.7]">
                       {step.text}
                     </p>
                   </div>

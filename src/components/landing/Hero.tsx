@@ -36,7 +36,7 @@ function handleHeroSubmit(event: React.FormEvent<HTMLFormElement>) {
       >
         <Image
           src="/images/landing-hero.png"
-          alt="Artysta na scenie"
+          alt="Artysta występujący na scenie przed publicznością"
           fill
           priority
           className="object-cover object-center"
@@ -48,7 +48,7 @@ function handleHeroSubmit(event: React.FormEvent<HTMLFormElement>) {
         <div className="relative z-10 pt-0 lg:pt-[22px]">
           <div className="mb-[22px] inline-flex h-[32px] items-center gap-[10px] rounded-[11px] bg-[#F1EAFE] px-[14px] text-[12px] font-medium text-[#7A7484] shadow-sm sm:text-[13px] lg:mb-[30px]">
             <span className="h-[8px] w-[8px] rounded-full bg-[#6D28D9]" />
-            Platforma dla sceny muzycznej
+            Platforma bookingowa dla sceny muzycznej
           </div>
 
           <h1 className="max-w-[720px] text-[42px] font-black leading-[1.04] tracking-[-0.055em] text-[#090909] sm:text-[54px] md:text-[66px] lg:max-w-none lg:text-[64px] lg:leading-[1.08] lg:tracking-[-0.045em]">
@@ -58,10 +58,10 @@ function handleHeroSubmit(event: React.FormEvent<HTMLFormElement>) {
           </h1>
 
           <p className="mt-[22px] max-w-[560px] text-[16px] font-medium leading-[1.75] text-[#6F6B78] sm:text-[17px] lg:mt-[28px] lg:max-w-[455px]">
-            StageUp łączy artystów, zespoły i organizatorów wydarzeń
-            muzycznych. Jedno miejsce.
+            StageUp to platforma bookingowa, która łączy artystów,
+            zespoły i organizatorów wydarzeń muzycznych.
             <br className="hidden sm:block" />
-            Więcej możliwości.
+            Znajduj koncerty, zgłoszenia i nowe współprace w jednym miejscu.
           </p>
 
           <form
@@ -98,7 +98,7 @@ function handleHeroSubmit(event: React.FormEvent<HTMLFormElement>) {
           <div className="relative mt-[6px] h-[330px] overflow-hidden rounded-[34px] border border-white bg-purple-50 shadow-[0_24px_80px_rgba(20,20,40,0.12)] sm:h-[420px] lg:hidden">
             <Image
               src="/images/landing-hero.png"
-              alt="Artysta na scenie"
+              alt="Artysta występujący na scenie przed publicznością"
               fill
               priority
               className="object-cover object-center"

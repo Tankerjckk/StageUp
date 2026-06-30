@@ -12,7 +12,7 @@ const navItems = [
   { label: "Dla artystów", href: "/#features" },
   { label: "Dla organizatorów", href: "/#features" },
   { label: "Jak to działa", href: "/#how-it-works" },
-  { label: "O projekcie", href: "/#waiting-list" },
+  { label: "FAQ", href: "/#faq" },
 ];
 
 export function Header() {

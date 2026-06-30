@@ -1,3 +1,4 @@
+import { faqItems } from "@/components/landing/FAQ";
 import { JsonLd } from "./JsonLd";
 
 export function HomeJsonLd() {
@@ -65,12 +66,26 @@ export function HomeJsonLd() {
     },
   };
 
+  const faqPage = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <JsonLd data={organization} />
       <JsonLd data={website} />
       <JsonLd data={webpage} />
       <JsonLd data={softwareApplication} />
+      <JsonLd data={faqPage} />
     </>
   );
 }
