@@ -4,12 +4,18 @@ import Image from "next/image";
 import { ArrowRight, Check } from "lucide-react";
 import { useWaitlist } from "@/context/WaitlistContext";
 import { Container } from "@/components/ui/Container";
+import { trackEvent } from "@/lib/analytics";
 
 export function Hero() {
   const { email, setEmail } = useWaitlist();
 
 function handleHeroSubmit(event: React.FormEvent<HTMLFormElement>) {
   event.preventDefault();
+
+  trackEvent("hero_cta_click", {
+    cta_name: "hero_waitlist",
+    has_email: Boolean(email.trim()),
+  });
 
   document.getElementById("waiting-list")?.scrollIntoView({
     behavior: "smooth",

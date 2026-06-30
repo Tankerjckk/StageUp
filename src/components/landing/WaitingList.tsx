@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { useWaitlist } from "@/context/WaitlistContext";
 import { SelectField } from "@/components/ui/SelectField";
+import { trackEvent } from "@/lib/analytics";
 
 export function WaitingList() {
   const { email, setEmail } = useWaitlist();
@@ -65,6 +66,11 @@ export function WaitingList() {
     setStatus("success");
     setMessage(data.message || "Jesteś zapisany na listę oczekujących StageUp!");
 
+    trackEvent("waitlist_submit", {
+  form_name: "landing_waitlist",
+  user_type: form.userType,
+  city: form.city,
+});
     setForm({
       name: "",
       city: "",

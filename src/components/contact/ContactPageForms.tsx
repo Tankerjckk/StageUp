@@ -9,6 +9,7 @@ import {
   Rocket,
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { trackEvent } from "@/lib/analytics";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -77,6 +78,9 @@ function ContactForm() {
       }
 
       setStatus("success");
+      trackEvent("contact_submit", {
+  form_name: "contact",
+});
       setMessage(data.message || "Wiadomość została wysłana. Dzięki!");
 
       setForm({
@@ -207,6 +211,10 @@ function InvestorForm() {
       }
 
       setStatus("success");
+      trackEvent("investor_submit", {
+  form_name: "investor",
+});
+      
       setMessage(data.message || "Zgłoszenie inwestorskie zostało wysłane.");
 
       setForm({

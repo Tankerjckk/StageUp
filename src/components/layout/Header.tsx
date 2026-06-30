@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { Logo } from "@/components/common/Logo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { trackEvent } from "@/lib/analytics";
 
 const navItems = [
   { label: "Dla artystów", href: "/#features" },
@@ -20,6 +21,49 @@ export function Header() {
 
   function closeMenu() {
     setIsOpen(false);
+  }
+
+  function handleLogoClick(location: "desktop" | "mobile") {
+    trackEvent("logo_click", {
+      href: "/",
+      location,
+    });
+
+    closeMenu();
+  }
+
+  function handleNavClick(
+    label: string,
+    href: string,
+    location: "desktop" | "mobile"
+  ) {
+    trackEvent("navbar_link_click", {
+      label,
+      href,
+      location,
+    });
+
+    closeMenu();
+  }
+
+  function handlePlatformClick(location: "desktop" | "mobile") {
+    trackEvent("navbar_cta_click", {
+      cta_name: "see_platform",
+      href: "/projekty",
+      location,
+    });
+
+    closeMenu();
+  }
+
+  function handleWaitlistClick(location: "mobile") {
+    trackEvent("mobile_navbar_cta_click", {
+      cta_name: "join_waitlist",
+      href: "/#waiting-list",
+      location,
+    });
+
+    closeMenu();
   }
 
   useEffect(() => {
@@ -73,7 +117,11 @@ export function Header() {
         }`}
       >
         <div className="flex shrink-0 items-center justify-between border-b border-neutral-100 px-6 py-5">
-          <a href="/" onClick={closeMenu} aria-label="StageUp - strona główna">
+          <a
+            href="/"
+            onClick={() => handleLogoClick("mobile")}
+            aria-label="StageUp - strona główna"
+          >
             <Logo />
           </a>
 
@@ -93,7 +141,7 @@ export function Header() {
               <a
                 key={item.label}
                 href={item.href}
-                onClick={closeMenu}
+                onClick={() => handleNavClick(item.label, item.href, "mobile")}
                 className="group flex items-center justify-between rounded-3xl px-5 py-4 text-[17px] font-black text-neutral-950 transition hover:bg-purple-50 hover:text-purple-700"
               >
                 <span>
@@ -114,7 +162,7 @@ export function Header() {
         <div className="shrink-0 border-t border-neutral-100 p-5">
           <a
             href="/projekty"
-            onClick={closeMenu}
+            onClick={() => handlePlatformClick("mobile")}
             className="flex h-[58px] items-center justify-center gap-3 rounded-2xl bg-purple-600 text-[15px] font-black text-white shadow-xl shadow-purple-600/20 transition hover:bg-purple-700"
           >
             Zobacz platformę
@@ -123,7 +171,7 @@ export function Header() {
 
           <a
             href="/#waiting-list"
-            onClick={closeMenu}
+            onClick={() => handleWaitlistClick("mobile")}
             className="mt-3 flex h-[54px] items-center justify-center rounded-2xl border border-purple-200 bg-white text-[15px] font-black text-purple-700 transition hover:bg-purple-50"
           >
             Dołącz do listy
@@ -141,7 +189,11 @@ export function Header() {
     <>
       <header className="sticky top-0 z-[9999] bg-[#FAFAFA]/85 py-4 backdrop-blur-xl md:py-7">
         <Container className="flex items-center justify-between">
-          <a href="/" onClick={closeMenu} aria-label="StageUp - strona główna">
+          <a
+            href="/"
+            onClick={() => handleLogoClick("desktop")}
+            aria-label="StageUp - strona główna"
+          >
             <Logo />
           </a>
 
@@ -150,6 +202,7 @@ export function Header() {
               <a
                 key={item.label}
                 href={item.href}
+                onClick={() => handleNavClick(item.label, item.href, "desktop")}
                 className="transition hover:text-purple-600"
               >
                 {item.label}
@@ -158,7 +211,7 @@ export function Header() {
           </nav>
 
           <div className="hidden lg:block">
-            <a href="/projekty">
+            <a href="/projekty" onClick={() => handlePlatformClick("desktop")}>
               <Button>Zobacz platformę</Button>
             </a>
           </div>
